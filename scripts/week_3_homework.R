@@ -3,7 +3,7 @@ surveys <- read.csv("data/portal_data_joined.csv")
 
 # Create a new data frame called surveys_base with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 5,000 rows. 
 colnames(surveys)
-surveys_base <- surveys[1:5000, c(6,9,13)]
+surveys_base <- surveys[1:5000, c(6,9,13)] # can also do with column names
 
 # Convert both species_id and plot_type to factors.
 surveys_base$species_id <- factor(surveys_base$species_id)

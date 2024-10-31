@@ -1,0 +1,103 @@
+---
+title: "R_Notes"
+output: html_document
+date: "2024-10-07"
+---
+
+Vectors & Subsetting
+```{r}
+## Remove object from environment 
+x <- 1 
+rm(x)  # one object
+rm(list = ls())  # all objects
+
+## Use tab inside of parenthesis of fcn to see what your argument options are
+
+## Comparison functions (T/F)
+mynumber <- 6
+mynumber == 4  # are these values the same?
+mynumber != 4  # are these values different?
+mynumber >= 4  # greater/less than or equal to 
+
+
+## Vectors 
+vector <- c(1:3) # create vector with all values 1-3
+vector2 <- c("dog", "cat", "fish") # create character vector
+
+length(vector) # counts elements in vector
+class(vector) # type of vector (can't be mixed classes)
+str(vector) # overview of vector structure & elements
+
+vector <- c(vector, 4) # add element to end of vector, flip notation to add to beginning
+
+vector * 3 # multiply every vector value by 3
+vector + 3 # add 3 to every vector value
+
+
+## Sub-setting vectors
+vector[1]  # [n] outputs value in the nth position of vector
+vector[c(1,2)] # [c(n,n)] outputs value in the nth & nth position of vector
+
+vector > 2 # outputs T/F for entries meeting condition
+vector[vector > 2]  # outputs actual values meeting criteria
+vector[vector > 2 | vector < 4] # outputs values meeting condition 1 OR condition 2 
+vector[vector > 2 & vector < 4] # outputs values meeting condition 1 AND condition 2 
+
+vector2 %in% c("duck", "dog", "fish") # checking if values simply exist in vector2 (output in order of vector2)
+vector2 == c("cat", "dog", "fish") # checking if values exist in exact same order
+
+vector[c(TRUE,FALSE)] # outputs every other value beginning with 1st value, recycles pattern through vector length
+
+
+## Missing data
+vector3 <- c(1,2,3,4,NA,6)
+
+is.na(vector3) # outputs T/F where TRUE means value == NA
+!is.na(vector3) # outputs T/F where FALSE means value == NA
+vector3[!is.na(vector3)] # outputs actual non-NA values 
+
+```
+
+Other Data Structures
+```{r}
+## Lists --> many vectors put together, can be different classes
+list <- list(4,6,"dog") # making a list
+
+## Data frame --> more picky lists; tabular, every vector must have same length
+df <- data.frame(
+  record_id = c(1:10),
+  animal = c("dog", "cat", "dog", "cat", "mouse", "mouse", "dog", "dog", "cat", "mouse"), 
+  month = c(1:10), 
+  day = c(1:10)  ) # making data frame
+df[2,1] # outputs value at position [row,column]
+df[1:2,] # outputs all columns for rows 1-2
+df[,1:2] # outputs all rows, but only columns 1-2
+
+ncol(df) # number columns
+nrow(df) # number columns
+dim(df) # dimensions (number rows, columns)
+str(df) # can use to see your columns, their classes, etc
+summary(df) # calls summary command on every column --> min, 1st quart, median, mean. 3rd quart, max
+colnames(df) # column names 
+
+df$animal # outputs only specific column, column must have a name
+
+head(df) # outputs first 6 rows of data, can adjust # rows or columns: head(df[,])
+tail(df) # outputs last 6 rows of data, can adjust # rows or columns: tail(df[,])
+head(df["animal"]) # outputs first 6 rows in specific column --> SUBSET OF COLUMNS
+head(df[["animal"]]) # outputs first 6 rows from specific column AS A VECTOR, extracts specific value
+# double bracket --> pulls data from that second level 
+head(df[,"animal"]) # does same as double bracket above 
+
+## Matrices (2D) & arrays (3D) --> like data frames, but only made of one class. not used often.
+
+## Factors --> integer vectors with character labels attached to them (look like character vector). levels (the characters) are assigned a number 1-n alphabetically. used for specific reasons, character vector easier to work with.
+factor1 <- factor1(c("male", "female", "female", "male")) # creating factor
+levels(factor1) # outputs the levels
+nlevels(factor1) # count number of levels 
+sex <- factor(x = factor1, levels = c("male", "female")) # reordering levels 
+levels(factor1)[1] <- "MALE" # renaming level 1 
+as.character(factor1) # converting to character vector. if characters are numbers, use as.numeric(as.character(factor1))
+
+```
+

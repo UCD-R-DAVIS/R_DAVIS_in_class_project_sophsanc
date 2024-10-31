@@ -54,7 +54,7 @@ surveys %>%
 surveys_avg_weight <- surveys %>% 
   filter(!is.na(weight)) %>% 
   group_by(species, sex) %>% 
-  mutate(avg_weight = mean(weight)) %>% 
+  mutate(avg_weight = mean(weight)) %>% # use mutate to add new column (summarise would smoosh it into a summary)
   select(species, sex, weight, avg_weight)
   
 
