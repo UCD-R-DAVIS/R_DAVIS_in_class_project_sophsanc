@@ -24,7 +24,7 @@ summary(surveys$weight)
 surveys <- surveys %>% 
   mutate(weight_cat_casewhen = case_when(
     weight <= 20 ~ "small", 
-    weight < 48.00 ~ "medium", 
+    weight < 48.00 ~ "medium", # can be "weight > 20.00 & weight < 48.00 ~ "medium"," so you dont have to worry about order
     weight >= 48 ~ "large"))
 
 surveys <- surveys %>% 
